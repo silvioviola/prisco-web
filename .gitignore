@@ -1,0 +1,25 @@
+# build
+dist/
+.astro/
+
+# deps
+node_modules/
+
+# entorno
+.env
+.env.production
+
+# material fuente / sueltos (no van a la web publicada)
+*.zip
+_contact.jpg
+_backup_autos_viejos/
+
+# scripts locales de ayuda
+INICIAR-WEB.bat
+SUBIR-A-GITHUB.bat
+ver-web.sh
+
+# sistema
+.DS_Store
+Thumbs.db
+npm-debug.log*

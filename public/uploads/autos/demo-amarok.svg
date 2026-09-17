@@ -1,0 +1,15 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#15181D"/>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <defs><radialGradient id="g" cx="78%" cy="4%" r="95%">
+    <stop offset="0%" stop-color="#E31E2E" stop-opacity="0.16"/>
+    <stop offset="55%" stop-color="#E31E2E" stop-opacity="0"/></radialGradient></defs>
+  <g fill="none" stroke="#454B54" stroke-width="3">
+    <path d="M230 370 q34 -80 100 -80 h130 q56 0 88 60 l44 9 q34 7 34 38 v20 h-395 z"/>
+  </g>
+  <circle cx="325" cy="418" r="30" fill="#20242A" stroke="#454B54" stroke-width="3"/>
+  <circle cx="520" cy="418" r="30" fill="#20242A" stroke="#454B54" stroke-width="3"/>
+  <text x="400" y="150" text-anchor="middle" font-family="Archivo, sans-serif" font-size="42" font-weight="800" fill="#F2F4F6">VW Amarok V6</text>
+  <text x="400" y="520" text-anchor="middle" font-family="Archivo, sans-serif" font-size="24" font-weight="700" fill="#727880">FOTO DE EJEMPLO — reemplazar</text>
+  <rect x="330" y="536" width="140" height="4" fill="#E31E2E"/>
+</svg>

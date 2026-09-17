@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Trace from '../components/Trace.astro';
+import { waLink } from '../lib/site';
+---
+<Base title="Servicios" description="Financiación, permuta y consignación en PRISCO Automotores. Comprar, vender o consignar de forma clara y confiable.">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Servicios</p>
+      <h1 class="section-title">Comprar, vender o consignar, sin vueltas</h1>
+      <p class="section-sub">Nuestro trabajo es que cada operación se sienta clara, confiable y profesional. Estas son las formas en que te acompañamos.</p>
+
+      <div class="cards-3" style="margin-top:10px">
+        <div class="info-card">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h10"/><circle cx="18" cy="17" r="3"/></svg></div>
+          <h3>Financiación</h3>
+          <p>Te ayudamos a llegar a tu auto en cuotas, con las mejores opciones disponibles. Te explicamos todo antes de firmar, sin letra chica.</p>
+          <div style="margin-top:16px"><a class="btn btn-ghost" href={waLink('Hola, quiero consultar por financiación.')}>Consultar financiación</a></div>
+        </div>
+        <div class="info-card">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></div>
+          <h3>Permuta</h3>
+          <p>Entregás tu usado como parte de pago de tu próximo auto. Hacemos una tasación justa y transparente, en el día.</p>
+          <div style="margin-top:16px"><a class="btn btn-ghost" href={waLink('Hola, quiero permutar mi auto. ¿Cómo es el proceso?')}>Consultar permuta</a></div>
+        </div>
+        <div class="info-card">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v13M7 8l5-5 5 5M5 21h14"/></svg></div>
+          <h3>Consignación</h3>
+          <p>¿Querés vender tu auto pero no querés ocuparte? Lo vendemos por vos: lo publicamos, lo mostramos y gestionamos la operación con respaldo.</p>
+          <div style="margin-top:16px"><a class="btn btn-ghost" href="/vende-tu-auto">Vender / consignar</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-band">
+        <Trace class="trace" />
+        <h2>Cada operación, con respaldo</h2>
+        <p>Garantía, transferencia y acompañamiento en todo el proceso. Escribinos y te asesoramos sin compromiso.</p>
+        <a class="btn btn-wa" href={waLink('Hola, quiero hacer una consulta sobre los servicios.')}>Hablar por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</Base>

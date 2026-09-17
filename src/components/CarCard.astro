@@ -1,0 +1,43 @@
+---
+import type { Auto } from '../lib/autos';
+import { autoTitulo, autoCover } from '../lib/autos';
+import { precioFmt, kmFmt, waLink } from '../lib/site';
+
+interface Props { auto: Auto }
+const { auto } = Astro.props;
+const d = auto.data;
+const titulo = autoTitulo(d);
+const cover = autoCover(d);
+const msg = `Hola, me interesa la ${titulo} (${d.anio}) publicada en la web. ¿Sigue disponible?`;
+---
+<article class="car-card"
+  data-marca={d.marca} data-anio={d.anio} data-precio={d.precio}
+  data-segmento={d.segmento} data-transmision={d.transmision}>
+  <a href={`/autos/${auto.slug}`} class="car-media">
+    <img src={cover} alt={titulo} loading="lazy" width="440" height="300" />
+    <div class="car-badges">
+      {d.destacado && <span class="badge badge-accent">Destacado</span>}
+      {d.permuta && <span class="badge">Permuta</span>}
+      {d.consignacion && <span class="badge">Consignación</span>}
+    </div>
+    {d.estado === 'Reservado' && <span class="badge badge-estado badge-reservado">Reservado</span>}
+    {d.estado === 'Vendido' && <span class="badge badge-estado badge-vendido">Vendido</span>}
+    <div class="car-price-media">
+      <div class="p">{precioFmt(d.precio, d.moneda)}</div>
+      {d.cuotaDesde && <div class="c">Cuotas desde ${d.cuotaDesde.toLocaleString('es-AR')}</div>}
+    </div>
+  </a>
+  <div class="car-body">
+    <a href={`/autos/${auto.slug}`}><h3 class="car-title">{titulo}</h3></a>
+    <div class="car-meta">
+      <span>{d.anio}</span><span>{kmFmt(d.km)}</span><span>{d.transmision}</span><span>{d.combustible}</span>
+    </div>
+    <div class="car-foot">
+      <a class="btn btn-ghost" href={`/autos/${auto.slug}`}>Ver detalle</a>
+      <a class="btn btn-wa" href={waLink(msg)} target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.4.6c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1 2 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+        Consultar
+      </a>
+    </div>
+  </div>
+</article>

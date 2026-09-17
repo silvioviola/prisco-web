@@ -1,0 +1,41 @@
+---
+import Logo from './Logo.astro';
+import { SITE, waLink } from '../lib/site';
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+const links = [
+  { href: '/', label: 'Inicio' },
+  { href: '/stock', label: 'Stock' },
+  { href: '/servicios', label: 'Servicios' },
+  { href: '/vende-tu-auto', label: 'Vendé tu auto' },
+  { href: '/contacto', label: 'Contacto' },
+];
+---
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <Logo class="logo" />
+      <span class="word">PRISCO<small>AUTOMOTORES</small></span>
+    </a>
+    <nav class="nav" id="nav">
+      {links.map((l) => (
+        <a href={l.href} class={isActive(l.href) ? 'active' : ''}>{l.label}</a>
+      ))}
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-desktop" href={waLink('Hola, quiero hacer una consulta.')}>
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.4.6c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1 2 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+        WhatsApp
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menú">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('nav');
+  btn?.addEventListener('click', () => nav?.classList.toggle('open'));
+</script>

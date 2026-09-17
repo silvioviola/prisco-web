@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+---
+<Base title="Vendé tu auto" description="¿Querés vender o consignar tu auto? Cargá los datos y te contactamos por WhatsApp con una propuesta.">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Vendé o consigná</p>
+      <h1 class="section-title">Vendé tu auto con nosotros</h1>
+      <p class="section-sub">Completá los datos y, al enviar, se abre WhatsApp con tu consulta lista. Te respondemos con una propuesta de compra o consignación.</p>
+
+      <form class="form" id="sellForm">
+        <div class="row">
+          <div>
+            <label for="v-nombre">Tu nombre</label>
+            <input id="v-nombre" name="nombre" required placeholder="Nombre y apellido" />
+          </div>
+          <div>
+            <label for="v-marca">Marca</label>
+            <input id="v-marca" name="marca" required placeholder="Ej: Volkswagen" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="v-modelo">Modelo</label>
+            <input id="v-modelo" name="modelo" required placeholder="Ej: Amarok" />
+          </div>
+          <div>
+            <label for="v-anio">Año</label>
+            <input id="v-anio" name="anio" type="number" min="1980" max="2026" required placeholder="Ej: 2019" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="v-km">Kilómetros</label>
+            <input id="v-km" name="km" type="number" min="0" placeholder="Ej: 80000" />
+          </div>
+          <div>
+            <label for="v-modo">Quiero</label>
+            <select id="v-modo" name="modo">
+              <option value="vender">Vender mi auto</option>
+              <option value="consignar">Consignarlo (que lo vendan por mí)</option>
+              <option value="permutar">Permutarlo por otro</option>
+            </select>
+          </div>
+        </div>
+        <label for="v-obs">Comentarios (opcional)</label>
+        <textarea id="v-obs" name="obs" placeholder="Estado general, detalles, etc."></textarea>
+        <button class="btn btn-wa btn-block" type="submit">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.4.6c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1 2 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+          Enviar por WhatsApp
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <script define:vars={{ wa: SITE.whatsapp }}>
+    document.getElementById('sellForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const modo = f.modo.value;
+      const accion = modo === 'consignar' ? 'consignar' : modo === 'permutar' ? 'permutar' : 'vender';
+      const msg =
+        `Hola, soy ${f.nombre.value}. Quiero ${accion} mi auto:\n` +
+        `• ${f.marca.value} ${f.modelo.value} ${f.anio.value}\n` +
+        (f.km.value ? `• ${Number(f.km.value).toLocaleString('es-AR')} km\n` : '') +
+        (f.obs.value ? `• ${f.obs.value}\n` : '') +
+        `¿Cómo seguimos?`;
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  </script>
+</Base>

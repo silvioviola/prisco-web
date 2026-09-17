@@ -1,0 +1,6 @@
+---
+// Logo real de PRISCO (monograma P con trazada roja).
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<img class={cls} src="/brand/logo-light.png" alt="PRISCO Automotores" width="44" height="44" />

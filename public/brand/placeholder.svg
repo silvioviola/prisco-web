@@ -1,0 +1,17 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#1B1E23"/>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <defs>
+    <radialGradient id="g" cx="80%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="#E31E2E" stop-opacity="0.12"/>
+      <stop offset="55%" stop-color="#E31E2E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g fill="none" stroke="#3A3E45" stroke-width="2">
+    <path d="M250 360 q30 -70 90 -70 h120 q50 0 80 55 l40 8 q30 6 30 34 v18 h-360 z"/>
+  </g>
+  <circle cx="330" cy="405" r="26" fill="#23262C" stroke="#3A3E45" stroke-width="2"/>
+  <circle cx="510" cy="405" r="26" fill="#23262C" stroke="#3A3E45" stroke-width="2"/>
+  <text x="400" y="500" text-anchor="middle" font-family="Archivo, sans-serif" font-size="30" font-weight="700" fill="#727880">PRISCO · Foto del vehículo</text>
+  <rect x="300" y="516" width="200" height="4" fill="#E31E2E"/>
+</svg>

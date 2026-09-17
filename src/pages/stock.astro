@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CarCard from '../components/CarCard.astro';
+import { ordenarAutos, disponibles } from '../lib/autos';
+
+const todos = ordenarAutos(disponibles(await getCollection('autos')));
+const marcas = [...new Set(todos.map((a) => a.data.marca))].sort();
+---
+<Base title="Stock de vehículos" description="Todo nuestro stock de usados y 0km en San Martín, Mendoza. Filtrá por marca, año, tipo y precio.">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Stock</p>
+      <h1 class="section-title">Vehículos disponibles</h1>
+      <p class="section-sub">Filtrá y encontrá el tuyo. Consultá cualquiera por WhatsApp en un toque.</p>
+
+      <div class="filters">
+        <div class="f">
+          <label for="f-marca">Marca</label>
+          <select id="f-marca">
+            <option value="">Todas</option>
+            {marcas.map((m) => <option value={m}>{m}</option>)}
+          </select>
+        </div>
+        <div class="f">
+          <label for="f-segmento">Tipo</label>
+          <select id="f-segmento">
+            <option value="">Todos</option>
+            <option value="Usado">Usado</option>
+            <option value="0km">0km</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="f-transmision">Transmisión</label>
+          <select id="f-transmision">
+            <option value="">Todas</option>
+            <option value="Manual">Manual</option>
+            <option value="Automática">Automática</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="f-anio">Año desde</label>
+          <input id="f-anio" type="number" min="1990" max="2026" placeholder="Ej: 2018" />
+        </div>
+        <div class="f">
+          <label for="f-precio">Precio hasta ($)</label>
+          <input id="f-precio" type="number" min="0" step="500000" placeholder="Ej: 20.000.000" />
+        </div>
+      </div>
+
+      <p class="result-count"><span id="count">{todos.length}</span> vehículos</p>
+
+      <div class="cars-grid" id="grid">
+        {todos.map((a) => <CarCard auto={a} />)}
+      </div>
+      <p class="empty hidden" id="noResults">No encontramos vehículos con esos filtros. Probá con otros.</p>
+    </div>
+  </section>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const el = (id) => document.getElementById(id);
+    const fMarca = el('f-marca'), fSeg = el('f-segmento'), fTrans = el('f-transmision'),
+          fAnio = el('f-anio'), fPrecio = el('f-precio');
+
+    // Prefill desde el buscador del home.
+    if (params.get('marca')) fMarca.value = params.get('marca');
+    if (params.get('segmento')) fSeg.value = params.get('segmento');
+    if (params.get('anioMin')) fAnio.value = params.get('anioMin');
+    if (params.get('precioMax')) fPrecio.value = params.get('precioMax');
+
+    const cards = [...document.querySelectorAll('#grid .car-card')];
+    const count = el('count'), noRes = el('noResults'), grid = el('grid');
+
+    function apply() {
+      const m = fMarca.value, s = fSeg.value, t = fTrans.value;
+      const a = parseInt(fAnio.value) || 0;
+      const p = parseInt(fPrecio.value) || Infinity;
+      let visible = 0;
+      cards.forEach((c) => {
+        const ok =
+          (!m || c.dataset.marca === m) &&
+          (!s || c.dataset.segmento === s) &&
+          (!t || c.dataset.transmision === t) &&
+          (Number(c.dataset.anio) >= a) &&
+          (Number(c.dataset.precio) <= p);
+        c.classList.toggle('hidden', !ok);
+        if (ok) visible++;
+      });
+      count.textContent = visible;
+      noRes.classList.toggle('hidden', visible !== 0);
+      grid.classList.toggle('hidden', visible === 0);
+    }
+    [fMarca, fSeg, fTrans, fAnio, fPrecio].forEach((c) => {
+      c.addEventListener('input', apply);
+      c.addEventListener('change', apply);
+    });
+    apply();
+  </script>
+</Base>

@@ -1,0 +1,32 @@
+<svg viewBox="0 0 880 520" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <radialGradient id="stg" cx="50%" cy="30%" r="80%">
+  <stop offset="0" stop-color="#242830"/><stop offset="52%" stop-color="#0f1116"/><stop offset="100%" stop-color="#070809"/>
+ </radialGradient>
+ <linearGradient id="bdy" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#31353d"/><stop offset="55%" stop-color="#1a1d23"/><stop offset="100%" stop-color="#0d0f13"/>
+ </linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#3a3f47"/><stop offset="100%" stop-color="#16181d"/>
+ </linearGradient>
+ <filter id="soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="18"/></filter>
+ <filter id="soft2" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<rect width="880" height="520" fill="url(#stg)"/>
+<ellipse cx="440" cy="150" rx="360" ry="150" fill="#E4121F" opacity="0.10" filter="url(#soft)"/>
+<ellipse cx="440" cy="404" rx="300" ry="34" fill="#E4121F" opacity="0.30" filter="url(#soft)"/>
+<ellipse cx="440" cy="410" rx="270" ry="26" fill="#000" opacity="0.55" filter="url(#soft2)"/>
+<path d="M138,360 L138,262 Q138,246 158,242 L236,230 Q252,190 306,184 L474,180 Q520,182 548,220 L560,232 L706,250 Q730,254 730,278 L730,360 Z" fill="url(#bdy)" stroke="#E4121F" stroke-opacity="0.55" stroke-width="1.6"/>
+<path d="M158,242 Q252,190 306,184 L474,180 Q520,182 548,220" fill="none" stroke="#FF3341" stroke-width="2.4" stroke-linecap="round" opacity="0.9" filter="url(#soft2)"/>
+<path d="M262,232 Q276,206 312,202 L392,200 L392,232 Z" fill="url(#glass)" opacity="0.9"/>
+<path d="M410,200 L470,200 Q502,202 522,230 L410,232 Z" fill="url(#glass)" opacity="0.9"/>
+<circle cx="250" cy="372" r="46" fill="#0c0d10" stroke="#2a2e35" stroke-width="3"/>
+<circle cx="250" cy="372" r="46" fill="none" stroke="#E4121F" stroke-width="2" stroke-opacity="0.5"/>
+<circle cx="250" cy="372" r="20" fill="#16181d" stroke="#33383f" stroke-width="2"/>
+<circle cx="610" cy="372" r="46" fill="#0c0d10" stroke="#2a2e35" stroke-width="3"/>
+<circle cx="610" cy="372" r="46" fill="none" stroke="#E4121F" stroke-width="2" stroke-opacity="0.5"/>
+<circle cx="610" cy="372" r="20" fill="#16181d" stroke="#33383f" stroke-width="2"/>
+<text x="34" y="486" font-family="Saira, sans-serif" font-size="22" font-weight="700" fill="#F5F6F8" letter-spacing="2">PRISCO</text>
+<text x="118" y="486" font-family="IBM Plex Mono, monospace" font-size="13" fill="#6b7079" letter-spacing="1">· foto del vehículo</text>
+<rect x="34" y="496" width="66" height="3" fill="#E4121F"/>
+</svg>

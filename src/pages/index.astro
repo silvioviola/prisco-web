@@ -1,0 +1,209 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CarCard from '../components/CarCard.astro';
+import Trace from '../components/Trace.astro';
+import { SITE, waLink, precioFmt, kmFmt } from '../lib/site';
+import { ordenarAutos, disponibles, autoTitulo, autoCover } from '../lib/autos';
+
+const todos = ordenarAutos(disponibles(await getCollection('autos')));
+const vitrina = todos.slice(0, 6);
+const hero = todos.find((a) => a.data.destacado) ?? todos[0];
+const marcas = [...new Set(todos.map((a) => a.data.marca))].sort();
+const cnt0km = todos.filter((a) => a.data.segmento === '0km').length;
+const cntUsados = todos.filter((a) => a.data.segmento === 'Usado').length;
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'AutoDealer',
+  name: SITE.nombre, description: SITE.slogan, url: SITE.dominio,
+  address: { '@type': 'PostalAddress', addressLocality: SITE.ciudad, addressRegion: SITE.provincia, addressCountry: 'AR' },
+  areaServed: 'Cuyo, Argentina',
+};
+const valores = ['Selección cuidada', 'Financiación a medida', 'Tomamos permuta', 'Consignación con respaldo', 'Transferencia incluida', 'Atención por WhatsApp'];
+---
+<Base>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="streaks"><span></span><span></span><span></span></div>
+    <img class="ghost" src="/brand/logo-light.png" alt="" aria-hidden="true" />
+    <Trace class="trace" />
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <p class="hero-eyebrow">Usados y 0km · San Martín, Mendoza</p>
+          <h1>Manejá tu<br>próximo <em>auto</em></h1>
+          <p class="lead">Selección premium, financiación, permuta y consignación. Elegí con precisión y consultá al instante por WhatsApp.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="/stock">Ver el stock</a>
+            <a class="btn btn-ghost btn-lg" href="/vende-tu-auto">Vendé tu auto</a>
+          </div>
+          <div class="hero-stats">
+            <div class="s"><span class="n" data-count={todos.length}>0</span><span class="l">Vehículos en stock</span></div>
+            <div class="s"><span class="n">0km<em>+</em>Usados</span><span class="l">Multimarca</span></div>
+            <div class="s"><span class="n">Mendoza</span><span class="l">San Martín · Cuyo</span></div>
+          </div>
+        </div>
+        {hero && (
+          <a class="stage" href={`/autos/${hero.slug}`}>
+            <span class="badge badge-accent">Destacado</span>
+            <img src={autoCover(hero.data)} alt={autoTitulo(hero.data)} width="640" height="480" />
+            <div class="info">
+              <div>
+                <div class="t">{autoTitulo(hero.data)}</div>
+                <div class="m">{hero.data.anio} · {kmFmt(hero.data.km)} · {hero.data.transmision}</div>
+              </div>
+              <div class="p">{precioFmt(hero.data.precio, hero.data.moneda)}</div>
+            </div>
+          </a>
+        )}
+      </div>
+
+      <form class="search" action="/stock" method="get">
+        <div><label for="marca">Marca</label><select id="marca" name="marca"><option value="">Todas</option>{marcas.map((m) => <option value={m}>{m}</option>)}</select></div>
+        <div><label for="segmento">Tipo</label><select id="segmento" name="segmento"><option value="">Todos</option><option value="Usado">Usado</option><option value="0km">0km</option></select></div>
+        <div><label for="anioMin">Año desde</label><input id="anioMin" name="anioMin" type="number" min="1990" max="2026" placeholder="2018" /></div>
+        <div><label for="precioMax">Precio hasta ($)</label><input id="precioMax" name="precioMax" type="number" min="0" step="500000" placeholder="20.000.000" /></div>
+        <div class="search-go"><button class="btn btn-primary btn-block" type="submit">Buscar</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee">
+    <div class="track">
+      {[...valores, ...valores].map((v) => (<span class="it"><span class="dot"></span><b>{v}</b></span>))}
+    </div>
+  </div>
+
+  <!-- ===== CATEGORÍAS ===== -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow reveal">Elegí por dónde empezar</p>
+      <h2 class="section-title reveal">0km o usados, tu decisión</h2>
+      <div class="cats" style="margin-top:14px">
+        <a class="cat reveal" href="/stock?segmento=0km">
+          <div class="art"><img src="/brand/veh-suv.svg" alt="" /></div>
+          <div class="glow"></div>
+          <span class="k">Cero kilómetro</span>
+          <h3>0km</h3>
+          <p>Unidades nuevas, listas para patentar. Financiación y planes a tu medida.</p>
+          <span class="go">Ver 0km <span>→</span></span>
+        </a>
+        <a class="cat reveal" href="/stock?segmento=Usado">
+          <div class="art"><img src="/brand/veh-sedan.svg" alt="" /></div>
+          <div class="glow"></div>
+          <span class="k">Usados seleccionados</span>
+          <h3>Usados</h3>
+          <p>Revisados y con historial claro. Recibimos tu auto en permuta.</p>
+          <span class="go">Ver usados <span>→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DESTACADOS ===== -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow reveal">Nuestra vitrina</p>
+          <h2 class="section-title reveal">Vehículos destacados</h2>
+        </div>
+        <a class="btn btn-ghost reveal" href="/stock">Ver todo el stock →</a>
+      </div>
+      {vitrina.length > 0 ? (
+        <div class="cars-grid">{vitrina.map((a, i) => <div class="reveal" style={`transition-delay:${i * 70}ms`}><CarCard auto={a} /></div>)}</div>
+      ) : (
+        <p class="empty">Todavía no hay vehículos cargados. Cargá el primero desde el panel /admin.</p>
+      )}
+    </div>
+  </section>
+
+  <!-- ===== POR QUÉ PRISCO ===== -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <p class="eyebrow reveal">Por qué PRISCO</p>
+      <h2 class="section-title reveal">Comprar, vender o consignar, sin vueltas</h2>
+      <p class="section-sub reveal">Cada operación clara, confiable y profesional. Esa es la promesa.</p>
+      <div class="cards-3">
+        <div class="info-card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h10"/><circle cx="18" cy="17" r="3"/></svg></div>
+          <h3>Financiación</h3>
+          <p>Llegás a tu auto en cuotas, con las mejores opciones. Te asesoramos sin letra chica.</p>
+        </div>
+        <div class="info-card reveal" style="transition-delay:70ms">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></div>
+          <h3>Permuta</h3>
+          <p>Entregás tu usado como parte de pago. Tasación clara y justa, en el día.</p>
+        </div>
+        <div class="info-card reveal" style="transition-delay:140ms">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v13M7 8l5-5 5 5M5 21h14"/></svg></div>
+          <h3>Consignación</h3>
+          <p>¿Querés vender tu auto? Lo vendemos por vos, con respaldo y difusión.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIOS ===== -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <p class="eyebrow reveal">Confianza</p>
+      <h2 class="section-title reveal">Lo que dicen quienes ya eligieron PRISCO</h2>
+      <div class="testis" style="margin-top:14px">
+        <div class="testi reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Trato impecable y muy transparentes con los papeles. Tomaron mi usado en permuta sin vueltas."</p>
+          <div class="who"><div class="av">MR</div><div><div class="n">Martín R.</div><div class="c">Compró una SUV</div></div></div>
+        </div>
+        <div class="testi reveal" style="transition-delay:70ms">
+          <div class="stars">★★★★★</div>
+          <p>"Me asesoraron con la financiación y en pocos días tenía el auto. Súper recomendables."</p>
+          <div class="who"><div class="av">LC</div><div><div class="n">Laura C.</div><div class="c">Primer 0km</div></div></div>
+        </div>
+        <div class="testi reveal" style="transition-delay:140ms">
+          <div class="stars">★★★★★</div>
+          <p>"Dejé mi auto en consignación y lo vendieron rápido, a buen precio y con todo en regla."</p>
+          <div class="who"><div class="av">GS</div><div><div class="n">Gabriel S.</div><div class="c">Consignó su auto</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="cta-band reveal">
+        <Trace class="trace" />
+        <h2>¿Buscás algo puntual?</h2>
+        <p>Contanos qué auto necesitás o qué tenés para permutar y te ayudamos a encontrarlo.</p>
+        <a class="btn btn-wa btn-lg" href={waLink('Hola, estoy buscando un auto. ¿Me ayudan?')}>
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.4.6c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1 2 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script>
+    // aparición al hacer scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // conteo animado
+    const countEls = document.querySelectorAll('[data-count]');
+    const io2 = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target, end = parseInt(el.dataset.count) || 0;
+        let cur = 0; const step = Math.max(1, Math.round(end / 30));
+        const t = setInterval(() => { cur += step; if (cur >= end) { cur = end; clearInterval(t); } el.textContent = cur; }, 28);
+        io2.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    countEls.forEach((el) => io2.observe(el));
+  </script>
+</Base>
