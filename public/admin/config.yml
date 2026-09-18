@@ -6,6 +6,7 @@ backend:
   name: github
   repo: silvioviola/prisco-web
   branch: main
+  base_url: https://sveltia-cms-auth.silvioalberto.workers.dev
 
 # Permite editar en tu compu antes de publicar en vivo.
 # Corré `npx @sveltia/cms-proxy-server` y entrá a http://localhost:4321/admin/
