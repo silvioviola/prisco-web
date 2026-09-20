@@ -26,7 +26,7 @@ export const SITE = {
 
   // Redes (dejá vacío '' lo que no uses).
   instagram: 'https://instagram.com/priscoautomotores',
-  facebook: '',
+  facebook: 'https://www.facebook.com/profile.php?id=61594254230741',
 
   // Moneda con que se muestran los precios.
   moneda: 'ARS',

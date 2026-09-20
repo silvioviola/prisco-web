@@ -1,5 +1,5 @@
+# Prisco Automotores — robots.txt
 User-agent: *
 Allow: /
-Disallow: /admin
 
 Sitemap: https://priscoautomotores.com.ar/sitemap-index.xml

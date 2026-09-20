@@ -7,7 +7,7 @@ import { ordenarAutos, disponibles } from '../lib/autos';
 const todos = ordenarAutos(disponibles(await getCollection('autos')));
 const marcas = [...new Set(todos.map((a) => a.data.marca))].sort();
 ---
-<Base title="Stock de vehículos" description="Todo nuestro stock de usados y 0km en San Martín, Mendoza. Filtrá por marca, año, tipo y precio.">
+<Base title="Stock de autos usados y 0km en San Martín" description="Todo el stock de autos usados y 0km de Prisco Automotores en San Martín, Mendoza. Filtrá por marca, año, tipo y precio. Financiación y permuta.">
   <section class="section">
     <div class="container">
       <p class="eyebrow">Stock</p>

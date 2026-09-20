@@ -11,11 +11,62 @@ interface Props {
 }
 const {
   title = SITE.nombre,
-  description = 'Usados y 0km seleccionados en San Martín, Mendoza. Financiación, permuta y consignación. Consultá por WhatsApp.',
+  description = 'Agencia de autos usados y 0km en San Martín, Mendoza. Compra, venta, permuta, financiación y consignación de vehículos seleccionados. Consultá por WhatsApp.',
   image = '/brand/og.svg',
 } = Astro.props;
 const fullTitle = title === SITE.nombre ? title : `${title} · ${SITE.nombre}`;
 const canonical = new URL(Astro.url.pathname, SITE.dominio).href;
+
+// Coordenadas aproximadas de Boulogne Sur Mer 160, San Martín, Mendoza.
+const GEO = { lat: -33.0817, lng: -68.4681 };
+
+// Redes sociales para el campo "sameAs" del esquema.
+const sameAs = [SITE.instagram, SITE.facebook].filter(Boolean);
+
+// Datos estructurados schema.org (AutoDealer) — le dice a Google qué es,
+// dónde está, teléfono, horarios y redes. Clave para el SEO local.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoDealer',
+  '@id': SITE.dominio + '/#agencia',
+  name: 'Prisco Automotores',
+  description:
+    'Agencia de autos usados y 0km en San Martín, Mendoza. Compra, venta, permuta, financiación y consignación de vehículos seleccionados.',
+  url: SITE.dominio,
+  logo: SITE.dominio + '/brand/logo-original.png',
+  image: SITE.dominio + '/brand/logo-original.png',
+  telephone: '+' + SITE.whatsapp,
+  priceRange: '$$',
+  currenciesAccepted: 'ARS',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Boulogne Sur Mer 160',
+    addressLocality: 'San Martín',
+    addressRegion: 'Mendoza',
+    postalCode: 'M5570',
+    addressCountry: 'AR',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: GEO.lat, longitude: GEO.lng },
+  areaServed: [
+    { '@type': 'City', name: 'San Martín' },
+    { '@type': 'AdministrativeArea', name: 'Mendoza' },
+  ],
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '09:00',
+      closes: '13:00',
+    },
+  ],
+  sameAs,
+};
 ---
 <!doctype html>
 <html lang="es">
@@ -30,6 +81,19 @@ const canonical = new URL(Astro.url.pathname, SITE.dominio).href;
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, SITE.dominio).href} />
     <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content={SITE.nombre} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, SITE.dominio).href} />
+    <!-- Geolocalización para búsquedas locales -->
+    <meta name="geo.region" content="AR-M" />
+    <meta name="geo.placename" content="San Martín, Mendoza" />
+    <meta name="geo.position" content={`${GEO.lat};${GEO.lng}`} />
+    <meta name="ICBM" content={`${GEO.lat}, ${GEO.lng}`} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <!-- Datos estructurados de la agencia (schema.org AutoDealer) -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <meta name="theme-color" content="#0B0C0F" />
     <link rel="icon" href="/brand/logo-original.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
