@@ -11,7 +11,8 @@ transmision: Manual
 combustible: GNC
 color: Blanco
 segmento: Usado
-estado: Vendido
+estado: Disponible
+publicado: true
 destacado: false
 permuta: true
 financiacion: true
