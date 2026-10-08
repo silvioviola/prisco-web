@@ -195,7 +195,7 @@ h1,h2,h3,h4{font-family:var(--f-display);line-height:1.04;letter-spacing:-.02em;
 .badge-accent{background:linear-gradient(180deg,var(--red-2),var(--red));border-color:transparent;box-shadow:0 4px 14px -4px var(--glow)}
 .badge-estado{position:absolute;top:13px;right:13px;z-index:2}
 .badge-reservado{background:#E0A82E;color:#1a1206;border-color:transparent}
-.badge-vendido{background:#3a3d43;color:#fff;border-color:transparent}
+.badge-vendido{background:#1f9d55;color:#fff;border-color:transparent;font-weight:700;letter-spacing:.02em}
 .car-price-media{position:absolute;left:15px;bottom:13px;z-index:2}
 .car-price-media .p{font-family:var(--f-mega);font-weight:700;font-size:1.6rem;color:#fff;line-height:1}
 .car-price-media .c{font-family:var(--f-mono);font-size:.72rem;color:var(--red-2);margin-top:4px}

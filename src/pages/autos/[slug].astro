@@ -62,6 +62,7 @@ const specs = [
           {d.cuotaDesde && <div class="ficha-cuota">Cuotas desde ${d.cuotaDesde.toLocaleString('es-AR')}</div>}
           <div class="ficha-badges">
             {d.estado === 'Reservado' && <span class="badge badge-reservado">Reservado</span>}
+            {d.estado === 'Vendido' && <span class="badge badge-vendido">Vendido</span>}
             {d.permuta && <span class="badge">Acepta permuta</span>}
             {d.financiacion && <span class="badge">Financiación</span>}
             {d.consignacion && <span class="badge">Consignación</span>}

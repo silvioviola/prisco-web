@@ -17,6 +17,7 @@ const autos = defineCollection({
     color: z.string().optional().default(''),
     segmento: z.enum(['Usado', '0km']).default('Usado'),
     estado: z.enum(['Disponible', 'Reservado', 'Vendido']).default('Disponible'),
+    publicado: z.boolean().default(true),
     destacado: z.boolean().default(false),
     permuta: z.boolean().default(true),
     financiacion: z.boolean().default(true),

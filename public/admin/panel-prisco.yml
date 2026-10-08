@@ -45,7 +45,8 @@ collections:
       - { label: 'Combustible', name: 'combustible', widget: 'select', options: ['Nafta', 'Diésel', 'GNC', 'Híbrido', 'Eléctrico'], default: 'Nafta' }
       - { label: 'Color', name: 'color', widget: 'string', required: false }
       - { label: 'Tipo', name: 'segmento', widget: 'select', options: ['Usado', '0km'], default: 'Usado' }
-      - { label: 'Estado', name: 'estado', widget: 'select', options: ['Disponible', 'Reservado', 'Vendido'], default: 'Disponible' }
+      - { label: 'Estado', name: 'estado', widget: 'select', options: ['Disponible', 'Reservado', 'Vendido'], default: 'Disponible', hint: 'Vendido muestra un cartel verde pero el auto SIGUE en la web. Para sacarlo del todo, apagá "Publicado en la web".' }
+      - { label: 'Publicado en la web', name: 'publicado', widget: 'boolean', default: true, hint: 'Encendido = el auto se ve en la web. Apagalo para BAJAR el auto de la web.' }
       - { label: '¿Destacado?', name: 'destacado', widget: 'boolean', default: false, hint: 'Aparece primero y en la portada' }
       - { label: '¿Acepta permuta?', name: 'permuta', widget: 'boolean', default: true }
       - { label: '¿Financiación?', name: 'financiacion', widget: 'boolean', default: true }

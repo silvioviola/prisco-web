@@ -25,7 +25,8 @@ export function ordenarAutos(a: Auto[]): Auto[] {
   });
 }
 
-// Solo los que se muestran (no vendidos por defecto en el home).
+// Se muestran todos los autos salvo los que se bajaron de la web (publicado:false).
+// Los 'Vendido' siguen visibles, con su cartel, para mostrar movimiento de la agencia.
 export function disponibles(a: Auto[]): Auto[] {
-  return a.filter((x) => x.data.estado !== 'Vendido');
+  return a.filter((x) => x.data.publicado !== false);
 }
