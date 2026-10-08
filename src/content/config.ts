@@ -21,10 +21,10 @@ const autos = defineCollection({
     permuta: z.boolean().default(true),
     financiacion: z.boolean().default(true),
     consignacion: z.boolean().default(false),
-    cuotaDesde: z.number().optional(),
+    cuotaDesde: z.number().nullable().optional(),
     fotos: z.array(z.string()).default([]),
     orden: z.number().optional().default(0),
-    fechaIngreso: z.coerce.date().optional(),
+    fechaIngreso: z.preprocess((v) => (v === '' || v === null ? undefined : v), z.coerce.date().optional()),
   }),
 });
 
