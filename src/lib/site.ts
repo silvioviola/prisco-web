@@ -22,7 +22,7 @@ export const SITE = {
   provincia: 'Mendoza',
 
   // Horarios (texto libre).
-  horarios: 'Lunes a viernes de 9 a 18 h · Sábados de 9 a 13 h',
+  horarios: 'Lunes a viernes de 8:30 a 13:00 h y de 16:30 a 19:30 h · Sábados de 9:30 a 12:30 h',
 
   // Redes (dejá vacío '' lo que no uses).
   instagram: 'https://instagram.com/priscoautomotores',
