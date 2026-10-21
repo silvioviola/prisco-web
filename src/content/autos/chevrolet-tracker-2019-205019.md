@@ -4,7 +4,7 @@ modelo: Tracker
 version: Awd Premier
 anio: 2019
 km: 58000
-precio: 23800000
+precio: 23000000
 moneda: ARS
 cuotaDesde: null
 transmision: Automática
