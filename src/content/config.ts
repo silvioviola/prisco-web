@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { normalizarFechaIngreso } from '../lib/fecha-ingreso';
 
 // Colección de vehículos. Cada auto es un archivo en src/content/autos/.
 // El panel /admin crea y edita estos archivos automáticamente.
@@ -11,7 +12,7 @@ const autos = defineCollection({
     anio: z.number(),
     km: z.number().default(0),
     precio: z.number(),
-    moneda: z.string().default('USD'),
+    moneda: z.enum(['ARS', 'USD']).default('ARS'),
     transmision: z.enum(['Manual', 'Automática']).default('Manual'),
     combustible: z.enum(['Nafta', 'Diésel', 'GNC', 'Híbrido', 'Eléctrico']).default('Nafta'),
     color: z.string().optional().default(''),
@@ -25,7 +26,7 @@ const autos = defineCollection({
     cuotaDesde: z.number().nullable().optional(),
     fotos: z.array(z.string()).default([]),
     orden: z.number().optional().default(0),
-    fechaIngreso: z.preprocess((v) => (v === '' || v === null ? undefined : v), z.coerce.date().optional()),
+    fechaIngreso: z.preprocess(normalizarFechaIngreso, z.coerce.date().optional()),
   }),
 });
 

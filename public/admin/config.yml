@@ -36,10 +36,10 @@ collections:
       - { label: 'Marca', name: 'marca', widget: 'string' }
       - { label: 'Modelo', name: 'modelo', widget: 'string' }
       - { label: 'Versión', name: 'version', widget: 'string', required: false, hint: 'Ej: 2.8 SRX 4x4' }
-      - { label: 'Año', name: 'anio', widget: 'number', value_type: 'int', min: 1980, max: 2027 }
+      - { label: 'Año', name: 'anio', widget: 'number', value_type: 'int', min: 1900, max: 2100 }
       - { label: 'Kilómetros', name: 'km', widget: 'number', value_type: 'int', default: 0 }
-      - { label: 'Precio', name: 'precio', widget: 'number', value_type: 'int', hint: 'Sin puntos ni símbolos. Ej: 45900' }
-      - { label: 'Moneda', name: 'moneda', widget: 'select', options: ['ARS', 'USD'], default: 'ARS' }
+      - { label: 'Precio', name: 'precio', widget: 'number', value_type: 'int', hint: 'Sin puntos ni símbolos. Ej: 25500000 para 25.500.000 pesos. La moneda se elige debajo.' }
+      - { label: 'Moneda', name: 'moneda', widget: 'select', options: [{ label: 'Pesos argentinos (ARS)', value: 'ARS' }, { label: 'Dólares estadounidenses (USD)', value: 'USD' }], default: 'ARS' }
       - { label: 'Cuota desde (opcional)', name: 'cuotaDesde', widget: 'number', value_type: 'int', required: false, hint: 'Valor de la cuota en pesos, si aplica' }
       - { label: 'Transmisión', name: 'transmision', widget: 'select', options: ['Manual', 'Automática'], default: 'Manual' }
       - { label: 'Combustible', name: 'combustible', widget: 'select', options: ['Nafta', 'Diésel', 'GNC', 'Híbrido', 'Eléctrico'], default: 'Nafta' }
@@ -52,7 +52,7 @@ collections:
       - { label: '¿Financiación?', name: 'financiacion', widget: 'boolean', default: true }
       - { label: '¿En consignación?', name: 'consignacion', widget: 'boolean', default: false }
       - { label: 'Orden', name: 'orden', widget: 'number', value_type: 'int', required: false, default: 0, hint: 'Menor número aparece primero' }
-      - { label: 'Fecha de ingreso', name: 'fechaIngreso', widget: 'datetime', required: false, date_format: 'DD-MM-YYYY', time_format: false }
+      - { label: 'Fecha de ingreso', name: 'fechaIngreso', widget: 'datetime', required: false, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, picker_utc: true, hint: 'Elegí el día en el calendario. Se guarda sin hora, como año-mes-día.' }
       - label: 'Fotos'
         name: 'fotos'
         widget: 'list'

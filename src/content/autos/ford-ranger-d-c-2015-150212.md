@@ -18,7 +18,7 @@ permuta: true
 financiacion: true
 consignacion: true
 orden: 0
-fechaIngreso: 10-12-2026
+fechaIngreso: 2026-12-10
 fotos:
   - /uploads/autos/fiat-palio-2015/IMG_1840-lista.png
   - /uploads/autos/IMG_1841-lista.png
