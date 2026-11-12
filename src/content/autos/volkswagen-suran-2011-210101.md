@@ -32,3 +32,5 @@ fotos:
   - /uploads/autos/IMG_2123.png
   - /uploads/autos/IMG_2122.png
 ---
+
+Oportunidad única: VW Suran 2011 Automática con kilometraje real súper bajo, mecánica impecable y todo el espacio que necesitás para la ciudad o la ruta.
