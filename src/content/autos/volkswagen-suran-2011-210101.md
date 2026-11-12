@@ -4,7 +4,7 @@ modelo: Suran
 version: 1.6l sd I Motion MB
 anio: 2011
 km: 152000
-precio: 11900000
+precio: 10900000
 moneda: ARS
 cuotaDesde: null
 transmision: Automática
