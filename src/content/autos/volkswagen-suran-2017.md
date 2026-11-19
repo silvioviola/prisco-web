@@ -1,21 +1,24 @@
 ---
-marca: "Volkswagen"
-modelo: "Suran"
-version: "Highline 1.6"
+marca: Volkswagen
+modelo: Suran
+version: Highline 1.6
 anio: 2017
 km: 209000
 precio: 17100000
 moneda: ARS
+cuotaDesde: null
 transmision: Manual
 combustible: Nafta
-color: "Blanco"
+color: Blanco
 segmento: Usado
-estado: Disponible
+estado: Vendido
+publicado: true
 destacado: false
 permuta: true
 financiacion: true
 consignacion: false
 orden: 0
+fechaIngreso: ''
 fotos:
   - /uploads/autos/volkswagen-suran-2017/portada.webp
   - /uploads/autos/volkswagen-suran-2017/foto-02.webp
@@ -27,4 +30,5 @@ fotos:
   - /uploads/autos/volkswagen-suran-2017/foto-08.webp
   - /uploads/autos/volkswagen-suran-2017/foto-09.webp
 ---
+
 Volkswagen Suran Highline 1.6 — Vehículo familiar, viajes, urbano, funcional, familiar. Permuta y financiación disponibles. Consultanos por WhatsApp y coordinamos para que lo veas.
