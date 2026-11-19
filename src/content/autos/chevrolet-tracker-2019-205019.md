@@ -11,7 +11,7 @@ transmision: Automática
 combustible: Nafta
 color: Gris plata
 segmento: Usado
-estado: Disponible
+estado: Vendido
 publicado: true
 destacado: true
 permuta: true
