@@ -1,21 +1,24 @@
 ---
-marca: "Mercedes-Benz"
-modelo: "C 200"
-version: "BlueEFFICIENCY"
+marca: Mercedes-Benz
+modelo: C 200
+version: BlueEFFICIENCY
 anio: 2012
 km: 191000
 precio: 22000000
 moneda: ARS
+cuotaDesde: null
 transmision: Automática
 combustible: Nafta
-color: "Gris"
+color: Gris
 segmento: Usado
-estado: Disponible
+estado: Vendido
+publicado: true
 destacado: false
 permuta: true
 financiacion: true
 consignacion: false
 orden: 0
+fechaIngreso: ''
 fotos:
   - /uploads/autos/mercedes-benz-c-200-2012/portada.webp
   - /uploads/autos/mercedes-benz-c-200-2012/foto-02.webp
@@ -25,4 +28,5 @@ fotos:
   - /uploads/autos/mercedes-benz-c-200-2012/foto-06.webp
   - /uploads/autos/mercedes-benz-c-200-2012/foto-07.webp
 ---
+
 Mercedes-Benz C 200 BlueEFFICIENCY — Muy buen auto, señorial, funcional, viajes, confort. Permuta y financiación disponibles. Consultanos por WhatsApp y coordinamos para que lo veas.
